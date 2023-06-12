@@ -1,5 +1,6 @@
 import { ThemeProvider } from "styled-components";
 import { ColorModeContext, useMode } from "./theme";
+
 import Login from "./scene/auth/login";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import ProtectedRoutes from "./component/ProtectedRoutes";
