@@ -1,10 +1,7 @@
 import { ThemeProvider } from "styled-components";
 import { ColorModeContext, useMode } from "./theme";
-import { Box } from "@mui/material";
 import Login from "./scene/auth/login";
-import TopBar from "./component/TopBar";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Home from "./component/Home";
 import ProtectedRoutes from "./component/ProtectedRoutes";
 import AddEmployeeForm from "./component/AddEmployeeForm";
 import DisplayEmployee from "./component/DisplayEmployee";
