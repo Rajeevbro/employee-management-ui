@@ -1,7 +1,6 @@
 import { ThemeProvider } from "styled-components";
 import { ColorModeContext, useMode } from "./theme";
 
-import Login from "./scene/auth/login";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import ProtectedRoutes from "./component/ProtectedRoutes";
 import AddEmployeeForm from "./component/AddEmployeeForm";
@@ -9,6 +8,7 @@ import DisplayEmployee from "./component/DisplayEmployee";
 import RegisterUser from "./scene/auth/RegisterUser";
 import Error from "./scene/error/Error";
 import Dashboard from "./scene/landingPage/Dashboard";
+import Login from "./scene/auth/login";
 
 function App() {
   const [theme, colorMode] = useMode();
