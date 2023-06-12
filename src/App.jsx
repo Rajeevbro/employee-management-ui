@@ -8,7 +8,7 @@ import DisplayEmployee from "./component/DisplayEmployee";
 import RegisterUser from "./scene/auth/RegisterUser";
 import Error from "./scene/error/Error";
 import Dashboard from "./scene/landingPage/Dashboard";
-import Login from "./scene/auth/login";
+import Login from "./scene/auth/Login";
 
 function App() {
   const [theme, colorMode] = useMode();
