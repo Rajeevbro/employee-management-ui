@@ -62,7 +62,7 @@ const DisplayEmployee = () => {
       alignItems={"center"}
     >
       {!isLoading ? (
-        <Box sx={{ width: "70vw", height: "80vh", padding: "5%" }}>
+        <Box sx={{ width: "80vw", height: "80vh", padding: "5%" }}>
           <Typography variant="h4">Employee Records</Typography>
           <DataGrid
             rows={employeeList}
