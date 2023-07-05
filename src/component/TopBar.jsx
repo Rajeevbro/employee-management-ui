@@ -23,6 +23,7 @@ const TopBar = () => {
   const { isSideBarOpen } = useSelector(
     (store) => store.userInterfaceControllStore
   );
+  console.log("hello");
   return (
     <>
       <AppBar position="static" sx={{ background: colors.blueAccent[400] }}>

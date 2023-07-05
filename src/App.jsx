@@ -9,6 +9,7 @@ import RegisterUser from "./scene/auth/RegisterUser";
 import Error from "./scene/error/Error";
 import Dashboard from "./scene/landingPage/Dashboard";
 import Login from "./scene/auth/Login";
+import UserControl from "./component/UserControl";
 
 function App() {
   const [theme, colorMode] = useMode();
@@ -21,6 +22,7 @@ function App() {
               <Route index element={<Dashboard />} />
               <Route path="addEmployee" element={<AddEmployeeForm />} />
               <Route path="viewEmployee" element={<DisplayEmployee />} />
+              <Route path="userControl" element={<UserControl />} />
             </Route>
             <Route path="auth/login" element={<Login />} />
             <Route path="auth/register" element={<RegisterUser />} />

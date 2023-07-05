@@ -63,7 +63,8 @@ const RegisterUser = () => {
         .required("SystemRole is required"),
     }),
     onSubmit: async (values) => {
-      const data = registerUser(values);
+      const data = await registerUser(values);
+
       if (data === undefined) {
         setSuccessSignal(true);
         setTimeout(() => {

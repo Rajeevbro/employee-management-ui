@@ -6,8 +6,10 @@ import userInterfaceControlReducer from "./userInterfaceControllerSlice";
 import storage from "redux-persist/lib/storage";
 import persistReducer from "redux-persist/es/persistReducer";
 import snackbarReducer from "./snackbarSlice";
+import globalReducer from "./globalslice";
 import { combineReducers } from "@reduxjs/toolkit";
 import thunk from "redux-thunk";
+import userReducer from "../store/userSlice";
 
 const persistConfig = {
   key: "root",
@@ -20,6 +22,8 @@ const combinedReducer = combineReducers({
   employeeStore: employeeReducer,
   userInterfaceControllStore: userInterfaceControlReducer,
   SnackBarStore: snackbarReducer,
+  globalStore: globalReducer,
+  userStore: userReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, combinedReducer);

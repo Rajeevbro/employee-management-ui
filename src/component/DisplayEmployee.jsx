@@ -4,6 +4,8 @@ import { DataGrid } from "@mui/x-data-grid";
 import { Padding } from "@mui/icons-material";
 import { Typography } from "@mui/material";
 import { useSelector } from "react-redux";
+import Loading from "./Loading";
+import ServerError from "./ServerError";
 
 const columns = [
   { field: "id", headerName: "ID", width: 90 },
@@ -48,24 +50,40 @@ const columns = [
 
 const DisplayEmployee = () => {
   const { employeeList } = useSelector((store) => store.employeeStore);
+
+  const { isLoading } = useSelector((store) => store.globalStore);
   console.log(employeeList);
   return (
-    <Box sx={{ width: "90vw", height: "80vh", padding: "5%" }}>
-      <Typography variant="h4">Employee Records</Typography>
-      <DataGrid
-        rows={employeeList}
-        columns={columns}
-        initialState={{
-          pagination: {
-            paginationModel: {
-              pageSize: 10,
-            },
-          },
-        }}
-        pageSizeOptions={[5]}
-        checkboxSelection
-        disableRowSelectionOnClick
-      />
+    <Box
+      width={"100vw"}
+      height={"100vh"}
+      display={"flex"}
+      justifyContent={"center"}
+      alignItems={"center"}
+    >
+      {!isLoading ? (
+        <Box sx={{ width: "70vw", height: "80vh", padding: "5%" }}>
+          <Typography variant="h4">Employee Records</Typography>
+          <DataGrid
+            rows={employeeList}
+            columns={columns}
+            initialState={{
+              pagination: {
+                paginationModel: {
+                  pageSize: 10,
+                },
+              },
+            }}
+            pageSizeOptions={[5]}
+            checkboxSelection
+            disableRowSelectionOnClick
+          />
+        </Box>
+      ) : (
+        <div>
+          <Loading />
+        </div>
+      )}
     </Box>
   );
 };

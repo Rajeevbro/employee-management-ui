@@ -24,7 +24,7 @@ import { Link, NavLink, Navigate, useNavigate } from "react-router-dom";
 import LogoutIcon from "@mui/icons-material/Logout";
 
 import PeopleOutlineIcon from "@mui/icons-material/PeopleOutline";
-
+import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
 import {
   setTokenValidity,
   setRole,
@@ -32,11 +32,15 @@ import {
 } from "../store/authenticationslice";
 import { tokens } from "../theme";
 import { useDispatch, useSelector } from "react-redux";
-import { loadUserData } from "../utilities/loadAuthenticationData";
+import {
+  loadAccountUserData,
+  loadUserData,
+} from "../utilities/loadAuthenticationData";
 import { addEmployee } from "../store/emploeeslice";
 import AppSnackBar from "./AppSnackBar";
 import { setIsSnackBarOpen, setSnackbarMessage } from "../store/snackbarSlice";
-
+import { setLoading } from "../store/globalslice";
+import { setUser } from "../store/userSlice";
 const drawerWidth = 240;
 
 const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })(
@@ -89,6 +93,7 @@ const SharedLayout = () => {
   const colors = tokens(theme.palette.mode);
   const [open, setOpen] = React.useState(false);
   const { token } = useSelector((store) => store.authenticationStore);
+  const dispatch = useDispatch();
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -101,11 +106,26 @@ const SharedLayout = () => {
 
   const handleClick = async (e) => {
     const employeeData = await loadUserData(token, "GET", null);
-
-    dispatch(addEmployee(employeeData));
+    console.log(employeeData);
+    if (employeeData === undefined) {
+      dispatch(setLoading(true));
+    } else {
+      dispatch(setLoading(false));
+      dispatch(addEmployee(employeeData));
+    }
     navigate("viewEmployee");
   };
-  const dispatch = useDispatch();
+
+  const handleUserData = async () => {
+    try {
+      const data = await loadAccountUserData();
+      console.log(data);
+      dispatch(setUser(data));
+      navigate("userControl");
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <Box sx={{ display: "flex" }}>
@@ -172,6 +192,14 @@ const SharedLayout = () => {
               <PeopleOutlineIcon />
             </ListItemIcon>
             <ListItemText primary={"View  Employee"} />
+          </ListItemButton>
+        </ListItem>
+        <ListItem>
+          <ListItemButton onClick={handleUserData}>
+            <ListItemIcon>
+              <AdminPanelSettingsIcon />
+            </ListItemIcon>
+            <ListItemText primary={"Users Portal"} />
           </ListItemButton>
         </ListItem>
         <Divider />
