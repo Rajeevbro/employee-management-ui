@@ -6,6 +6,7 @@ const initialState = {
   isLoading: true,
   role: "",
   isTokenValid: false,
+  userName: "",
 };
 
 const authenticationSlice = createSlice({
@@ -27,6 +28,9 @@ const authenticationSlice = createSlice({
     setTokenValidity: (state, { payload }) => {
       state.isTokenValid = payload;
     },
+    setUserName: (state, { payload }) => {
+      state.userName = payload;
+    },
   },
 });
 
@@ -36,6 +40,7 @@ export const {
   setRole,
   setToken,
   setTokenValidity,
+  setUserName,
 } = authenticationSlice.actions;
 
 export default authenticationSlice.reducer;

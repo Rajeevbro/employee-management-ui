@@ -18,6 +18,7 @@ import * as Yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
 import authenticationslice, {
   setTokenValidity,
+  setUserName,
 } from "../../store/authenticationslice";
 import { Link, useNavigate } from "react-router-dom";
 import {
@@ -65,6 +66,7 @@ const Login = () => {
       if (data.token !== null) {
         dispatch(setTokenValidity(true));
         dispatch(setToken(data.token));
+        dispatch(setUserName(data.userName));
       }
 
       navigate("/");

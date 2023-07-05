@@ -22,6 +22,7 @@ import { Avatar, Snackbar } from "@mui/material";
 import PersonAddAlt1Icon from "@mui/icons-material/PersonAddAlt1";
 import { Link, NavLink, Navigate, useNavigate } from "react-router-dom";
 import LogoutIcon from "@mui/icons-material/Logout";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 
 import PeopleOutlineIcon from "@mui/icons-material/PeopleOutline";
 import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
@@ -92,7 +93,7 @@ const SharedLayout = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const [open, setOpen] = React.useState(false);
-  const { token } = useSelector((store) => store.authenticationStore);
+  const { token, userName } = useSelector((store) => store.authenticationStore);
   const dispatch = useDispatch();
 
   const handleDrawerOpen = () => {
@@ -133,7 +134,13 @@ const SharedLayout = () => {
       <AppBar
         position="fixed"
         open={open}
-        sx={{ background: colors.blueAccent[400] }}
+        sx={{
+          background: colors.blueAccent[400],
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "space-between",
+          alignItems: "center",
+        }}
       >
         <Toolbar>
           <IconButton
@@ -149,6 +156,12 @@ const SharedLayout = () => {
             Employee Management System
           </Typography>
         </Toolbar>
+        <Box display={"flex"} width={"15%"}>
+          <AccountCircleIcon fontSize="large" />
+          <Typography marginLeft={"6%"} variant="h6">
+            {userName}
+          </Typography>
+        </Box>
       </AppBar>
       <Drawer
         sx={{

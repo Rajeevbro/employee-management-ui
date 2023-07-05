@@ -19,6 +19,9 @@ const UserControl = () => {
   const dispatch = useDispatch();
   const { userData } = useSelector((store) => store.userStore);
   const [userId, setId] = useState("");
+  const { userName: accessName } = useSelector(
+    (store) => store.authenticationStore
+  );
   const handleRemoveUserClick = async (id) => {
     await deleteUserAccount(id);
     const data = await loadAccountUserData();
@@ -76,9 +79,18 @@ const UserControl = () => {
               </Box>
               <Box marginLeft={"2rem"} padding={"5px"}>
                 <Tooltip title="Delete User">
-                  <IconButton onClick={() => handleRemoveUserClick(id)}>
-                    <ClearIcon color="warning" />
-                  </IconButton>
+                  {userName === accessName ? (
+                    <IconButton
+                      disabled
+                      onClick={() => handleRemoveUserClick(id)}
+                    >
+                      <ClearIcon color="grey" />
+                    </IconButton>
+                  ) : (
+                    <IconButton onClick={() => handleRemoveUserClick(id)}>
+                      <ClearIcon color="warning" />
+                    </IconButton>
+                  )}
                 </Tooltip>
               </Box>
             </Paper>
